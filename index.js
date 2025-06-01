@@ -18,9 +18,19 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser())
 
 const corsOptions = {
-    origin:'*',
-    credentials:true
-}
+  origin: (origin, callback) => {
+
+    if (!origin) return callback(null, true);
+    if (['http://localhost:3000', process.env.FRONTEND_URL].includes(origin)) {
+      callback(null, true); 
+    } else {
+      callback(new Error('Not allowed by CORS')); /
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, 
+};
 app.use(cors(corsOptions))
 
 
