@@ -24,7 +24,7 @@ const corsOptions = {
     if (['http://localhost:3000', process.env.FRONTEND_URL].includes(origin)) {
       callback(null, true); 
     } else {
-      callback(new Error('Not allowed by CORS')); /
+      callback(new Error('Not allowed by CORS')); 
     }
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
