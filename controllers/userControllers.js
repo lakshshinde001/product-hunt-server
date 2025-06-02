@@ -1,6 +1,6 @@
 import { User } from "../modules/userModule.js";
-import cloudinary from "../utils/cloudinary.js";
-import getDataUri from "../utils/datauri.js";
+import { Product } from "../modules/productModule.js";
+import { Comment } from "../modules/commentModule.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv';
@@ -104,4 +104,61 @@ export const logout = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
+}
+
+export const getUpvotedProducts = async (req, res) => {
+  const userId = req.id
+
+  try {
+    const products = await Product.find({ upvotes: userId })
+      .populate('user', 'fullname email') 
+      .exec()
+
+    res.status(200).json({
+      success: true,
+      products,
+    })
+  } catch (error) {
+    console.error('Error fetching upvoted products:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Server error while fetching upvoted products',
+    })
+  }
+}
+
+
+export const getCommentedProducts = async (req, res) => {
+  const userId = req.id
+
+  try {
+    
+    const commentedProductIds = await Comment.distinct('product', { user: userId })
+
+    
+    const products = await Product.find({ _id: { $in: commentedProductIds } })
+      .populate('user', 'fullname email') 
+      .lean() 
+
+  
+    for (const product of products) {
+      const userComments = await Comment.find({
+        product: product._id,
+        user: userId
+      }).lean()
+
+      product.userComments = userComments
+    }
+
+    res.status(200).json({
+      success: true,
+      products,
+    })
+  } catch (error) {
+    console.error('Error fetching commented products:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Server error while fetching commented products',
+    })
+  }
 }
