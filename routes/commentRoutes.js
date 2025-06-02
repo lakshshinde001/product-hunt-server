@@ -8,4 +8,5 @@ const router = express.Router();
 router.route('/:id/add').post(isAuthenticated, addComment)
 router.route('/:id').get( getAllComments)
 
+
 export default router;
