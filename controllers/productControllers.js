@@ -117,3 +117,41 @@ export const getSingleProduct = async (req, res) => {
     });
   }
 };
+
+export const upvoteProduct = async (req, res) => {
+  const productId = req.params.id;
+  const userId = req.id; 
+
+  if (!userId) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+
+  try {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    const hasUpvoted = product.upvotes.includes(userId);
+
+    if (hasUpvoted) {
+      return res.status(400).json({ success: false, message: "You have already upvoted this product" });
+    }
+
+    product.upvotes.push(userId);
+    await product.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Product upvoted successfully",
+      upvotesCount: product.upvotes.length,
+    });
+  } catch (error) {
+    console.error("Error upvoting product:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error while upvoting product",
+    });
+  }
+};
