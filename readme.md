@@ -75,7 +75,8 @@ npm install
 
 
 ## 🧪  API Endpoints Overview
-## The API provides endpoints for user authentication, product management, and commenting.
+
+---
 
 | Method | Endpoint                         | Description                    |
 | ------ | -------------------------------  | ------------------------------ |
@@ -92,3 +93,4 @@ npm install
 | GET    | /api/v1/comments/:id             | Get All  Comments of Product   |
 | POST   | /api/v1/comments/:id/add         | Add comment to a Product       |
 
+---
