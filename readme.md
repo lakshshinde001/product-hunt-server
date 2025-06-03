@@ -59,21 +59,6 @@ https://product-hunt-pi.vercel.app/
 ---
 
 
-
-
-## ⚙️ Setup Instructions
-
-### 1. Clone the Repository
-
-
-```bash
-git clone https://github.com/lakshshinde001/product-hunt-server.git
-cd producthunt-clone
-
-
-npm install
-
-
 ## 🧪  API Endpoints Overview
 
 ---
@@ -94,3 +79,19 @@ npm install
 | POST   | /api/v1/comments/:id/add         | Add comment to a Product       |
 
 ---
+
+
+
+## ⚙️ Setup Instructions
+
+### 1. Clone the Repository
+
+
+```bash
+git clone https://github.com/lakshshinde001/product-hunt-server.git
+cd producthunt-clone
+
+
+npm install
+
+
