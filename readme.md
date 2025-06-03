@@ -74,8 +74,8 @@ cd producthunt-clone
 npm install
 
 
-
-🧪 API Endpoints Overview
+## 🧪  API Endpoints Overview
+## The API provides endpoints for user authentication, product management, and commenting.
 
 | Method | Endpoint                         | Description                    |
 | ------ | -------------------------------  | ------------------------------ |
