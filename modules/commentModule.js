@@ -20,7 +20,7 @@ const commentSchema = new mongoose.Schema(
     nestedComments: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment",
-      default: null, 
+      default: "Hii..!", 
     },
   },
   { timestamps: true }
